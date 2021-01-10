@@ -6,7 +6,6 @@ import { ArticleDto } from '../../domain/data-transfer-objects/article-dto';
 import { Article } from '../../domain/models/article';
 import { ArticleCategoryDto } from '../../domain/data-transfer-objects/article-category-dto';
 import { ArticleCategory } from '../../domain/models/articleCategory';
-import { Schema } from 'mongoose';
 import { ObjectID } from 'mongodb'
 
 @Injectable()
