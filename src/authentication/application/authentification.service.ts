@@ -14,14 +14,14 @@ export class AuthentificationService {
 
   async validateUser(username: string, password: string): Promise<User> {
     const user = await this.usersService.getUserByUsername(username);
-    if (user && this.checkPassword(password, user.password)) {
+    if (user && await this.checkPassword(password, user.password)) {
       return user;
     }
     return null;
   }
 
-  private checkPassword(password: string, passwordHash: string): Boolean {
-    return bcrypt.compare(password, passwordHash)
+  private async checkPassword(password: string, passwordHash: string): Promise<Boolean> {
+    return await bcrypt.compare(password, passwordHash)
   }
 
   hashSub(id: any, username: any, role_name: any): any {

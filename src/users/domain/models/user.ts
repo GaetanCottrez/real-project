@@ -1,13 +1,14 @@
 import { v4 as uuid } from 'uuid';
 import { UserDto } from '../data-transfer-objects/user-dto';
-import { IUser, RoleEnum, typeAccountUser } from '../../../interfaces/user.interface';
+import { IUser, RoleEnum } from '../../../interfaces/user.interface';
 import { UserMail } from '../value-objects/usermail';
 import { UserPassword} from '../value-objects/userpassword';
 import { ChangeDetailsUserDto } from '../data-transfer-objects/change-details-user-dto';
+import { typeAccountUser } from './typeAccountUser';
 
 export class User implements IUser {
   private _id: string;
-  private _external_id: number;
+  private _externalId: number;
   private _username: string;
   private _password: string;
   private _displayName: string;
@@ -21,7 +22,7 @@ export class User implements IUser {
 
   constructor(
     id: string,
-    external_id: number,
+    externalId: number,
     username: string,
     password: string,
     firstName: string,
@@ -32,7 +33,7 @@ export class User implements IUser {
     accounts: typeAccountUser[]
   ) {
     this._id = id;
-    this._external_id = external_id;
+    this._externalId = externalId;
     this._username = username;
     this._firstName = firstName;
     this._lastName = lastName;
@@ -47,8 +48,8 @@ export class User implements IUser {
     return this._id;
   }
 
-  public get external_id(): number {
-    return this._external_id;
+  public get externalId(): number {
+    return this._externalId;
   }
 
   public get firstName(): string {
@@ -96,9 +97,23 @@ export class User implements IUser {
   asDTO(): UserDto {
     return {
       id: this._id,
-      external_id: this._external_id,
+      externalId: this._externalId,
       username: this._username,
       password: this._password,
+      firstName: this._firstName,
+      lastName: this._lastName,
+      displayName: this._displayName,
+      email: this._email.value,
+      accounts: this._accounts,
+      role: this._role,
+    } as UserDto;
+  }
+
+  asDTOWithoutPassword(): UserDto {
+    return {
+      id: this._id,
+      externalId: this._externalId,
+      username: this._username,
       firstName: this._firstName,
       lastName: this._lastName,
       displayName: this._displayName,
@@ -111,6 +126,12 @@ export class User implements IUser {
   changeRole(role: RoleEnum) {
     if (role) {
       this._role = role;
+    }
+  }
+
+  changeAccount(accounts: typeAccountUser[]) {
+    if (accounts.length > 0 && this._accounts.length === 0) {
+      this._accounts = accounts;
     }
   }
 
@@ -141,9 +162,9 @@ export class User implements IUser {
     const instanceUserPassword = new UserPassword(user.password)
     return new User(
       uuid(),
-      user.external_id,
+      user.externalId,
       user.username,
-      instanceUserPassword.value,
+      UserPassword.hashPassword(instanceUserPassword.value),
       user.firstName,
       user.lastName,
       user.displayName,

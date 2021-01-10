@@ -12,141 +12,119 @@ import {
   Patch,
   UsePipes, Post,
 } from '@nestjs/common';
-import { User } from "../domain/models/user";
-import { UserDto } from "../domain/data-transfer-objects/user-dto";
-import { UsersService } from "../application/users.service";
-import { DomainExceptionFilter } from "src/shared/infrastructure/filters/error.filter";
-import { ApiBearerAuth, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { JwtAuthGuard } from "src/authentication/infrastructure/guard/jwt-auth.guard";
-import { PatchRoleUserDto } from "../domain/data-transfer-objects/patch-role-user-dto";
-import { Abilities } from "src/authentication/infrastructure/guard/abilities.decorator";
+import { User } from '../domain/models/user';
+import { UserDto } from '../domain/data-transfer-objects/user-dto';
+import { UsersService } from '../application/users.service';
+import { DomainExceptionFilter } from 'src/shared/infrastructure/filters/error.filter';
+import { ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/authentication/infrastructure/guard/jwt-auth.guard';
+import { PatchRoleUserDto } from '../domain/data-transfer-objects/patch-role-user-dto';
+import { Abilities } from 'src/authentication/infrastructure/guard/abilities.decorator';
 
-@ApiTags("Users")
+@ApiTags('Users')
 @ApiBearerAuth()
-@Controller("users")
+@Controller('users')
 @UseFilters(new DomainExceptionFilter())
 export class UsersController {
   constructor(
-    @Inject("UsersService") private readonly usersService: UsersService
+    @Inject('UsersService') private readonly usersService: UsersService,
   ) {
   }
 
   @Post('')
+  @ApiResponse({ status: 201, description: 'User created' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
+  @UseGuards(JwtAuthGuard)
+  @Abilities('Users:create')
   async registerNewUser(
-    @Body(new ValidationPipe({ transform: true })) user: UserDto
+    @Body(new ValidationPipe({ transform: true })) user: UserDto,
   ) {
-    const newUser = User.create(user);
-    await this.usersService.createUser(newUser);
-    return await this.usersService.userView(newUser);
+    return await this.usersService.createUser(user);
   }
 
-  @Get("")
-  @ApiResponse({ status: 200, description: "Get users" })
-  @ApiResponse({ status: 403, description: "Forbidden." })
+  @Get('')
+  @ApiResponse({ status: 200, description: 'Get users' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
   @UseGuards(JwtAuthGuard)
-  @Abilities("Users:read")
+  @Abilities('Users:read')
   async getUsers(): Promise<UserDto[]> {
     try {
       const users = await this.usersService.getUsers();
       const userDto = [];
       for (const user of users) {
-        userDto.push(await this.usersService.userView(user));
+        userDto.push(this.usersService.userView(user));
       }
       return userDto;
     } catch (error) {
       throw new HttpException(
         error.message,
-        error.status || HttpStatus.BAD_REQUEST
+        error.status || HttpStatus.BAD_REQUEST,
       );
     }
   }
 
-  @Get("roles/:role")
-  @ApiResponse({ status: 200, description: "Get users by role" })
-  @ApiResponse({ status: 403, description: "Forbidden." })
+  @Get('roles/:role')
+  @ApiResponse({ status: 200, description: 'Get users by role' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
   @UseGuards(JwtAuthGuard)
-  @Abilities("Users:read")
-  async getUsersByRoles(@Param("role") roles: string): Promise<User[]> {
+  @Abilities('Users:read')
+  async getUsersByRoles(@Param('role') roles: string): Promise<User[]> {
     try {
-      return await this.usersService.getUsers({
-        roles: roles.split(",")
+      const users = await this.usersService.getUsers({
+        roles: roles.split(','),
       });
-    } catch (error) {
-      throw new HttpException(
-        error.message,
-        error.status || HttpStatus.BAD_REQUEST
-      );
-    }
-  }
-
-  @Get("roles/:role/entities/:entities")
-  @ApiResponse({ status: 200, description: "Get users by role by entities" })
-  @ApiResponse({ status: 403, description: "Forbidden." })
-  @UseGuards(JwtAuthGuard)
-  @Abilities("Users:read")
-  async getUsersByRolesByEntities(
-    @Param("role") roles: string,
-    @Param("entities") entities: string
-  ): Promise<User[]> {
-    try {
-      const arrayFormatedUser = [];
-      const listUsers = await this.usersService.getUsers({
-        roles: roles.split(","),
-        entities: entities.split(",")
-      });
-
-      for (const user of listUsers) {
-        arrayFormatedUser.push(await this.usersService.userView(user));
+      const userDto = [];
+      for (const user of users) {
+        userDto.push(this.usersService.userView(user));
       }
-
-      return arrayFormatedUser;
+      return userDto;
     } catch (error) {
       throw new HttpException(
         error.message,
-        error.status || HttpStatus.BAD_REQUEST
+        error.status || HttpStatus.BAD_REQUEST,
       );
     }
   }
 
-  @Get(":id")
-  @ApiResponse({ status: 200, description: "Get one user" })
-  @ApiResponse({ status: 400, description: "User not found" })
-  @ApiResponse({ status: 403, description: "Forbidden." })
+  @Get(':id')
+  @ApiResponse({ status: 200, description: 'Get one user' })
+  @ApiResponse({ status: 400, description: 'User not found' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
   @UseGuards(JwtAuthGuard)
-  @Abilities("Users:read")
-  async findOne(@Param("id") id: string): Promise<UserDto> {
+  @Abilities('Users:read')
+  async findOne(@Param('id') id: string): Promise<UserDto> {
     try {
       const userInstance = await this.usersService.getUserById(id);
-      return await this.usersService.userView(userInstance);
+      return this.usersService.userView(userInstance);
     } catch (error) {
       throw new HttpException(
         error.message,
-        error.status || HttpStatus.BAD_REQUEST
+        error.status || HttpStatus.BAD_REQUEST,
       );
     }
   }
 
-  @Patch(":id")
-  @ApiResponse({ status: 200, description: "Patch user" })
-  @ApiResponse({ status: 400, description: "User not found" })
-  @ApiResponse({ status: 403, description: "Forbidden." })
+  @Patch(':id')
+  @ApiResponse({ status: 200, description: 'Patch user' })
+  @ApiResponse({ status: 400, description: 'User not found' })
+  @ApiResponse({ status: 403, description: 'Forbidden.' })
   @UsePipes(new ValidationPipe({ transform: true }))
   @UseGuards(JwtAuthGuard)
-  @Abilities("Users:patch")
+  @Abilities('Users:patch')
   async patchUser(
-    @Param("id") id: string,
-    @Body() patchRoleUser: PatchRoleUserDto
+    @Param('id') id: string,
+    @Body() patchRoleUser: PatchRoleUserDto,
   ) {
     try {
       const userWithUpdateRole = await this.usersService.patchRole(
         id,
-        patchRoleUser.role
+        patchRoleUser.role,
       );
-      return await this.usersService.userView(userWithUpdateRole);
+      return this.usersService.userView(userWithUpdateRole);
     } catch (error) {
       throw new HttpException(
         error.message,
-        error.status || HttpStatus.BAD_REQUEST
+        error.status || HttpStatus.BAD_REQUEST,
       );
     }
   }

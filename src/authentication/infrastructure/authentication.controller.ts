@@ -5,15 +5,11 @@ import {
   UseGuards,
   Request,
   UseFilters,
-  Redirect,
-  HttpException,
-  HttpStatus, Get
 } from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
 import { DomainExceptionFilter } from "../../shared/infrastructure/filters/error.filter";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { AuthentificationService } from "../application/authentification.service";
-import { LocalAuthGuard } from './guard/local-auth.guard';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags("Auth")
 @Controller("auth")
@@ -25,9 +21,9 @@ export class AuthenticationController {
   }
 
   @Post("login")
-  @ApiResponse({ status: 200, description: "call redirect microsoft" })
-  @ApiResponse({ status: 400, description: "Error call redirect microsoft" })
-  @UseGuards(LocalAuthGuard)
+  @ApiResponse({ status: 201, description: "return created token" })
+  @ApiResponse({ status: 401, description: "Unauthorized" })
+  @UseGuards(AuthGuard("local"))
   async login(@Request() req) {
     return this.authentificationService.login(req.user);
   }

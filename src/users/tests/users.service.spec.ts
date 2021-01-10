@@ -5,11 +5,10 @@ import { UserDto } from "../domain/data-transfer-objects/user-dto";
 import { MongodbUsersRepository } from "../infrastructure/repositories/mongodb-users.repository";
 import { Db, MongoClient } from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
-const mongod = new MongoMemoryServer();
 
 describe("UsersService", () => {
   let service: UsersService;
-  let makeUser;
+  let makeUserDto;
   let con: MongoClient;
   let db: Db;
   let mongoServer: MongoMemoryServer;
@@ -27,9 +26,9 @@ describe("UsersService", () => {
 
     service = new UsersService(new MongodbUsersRepository(db));
 
-    makeUser = (username = "john.doe", email = "john.doe@nomail.com") =>
-      User.create({
-        external_id: 999,
+    makeUserDto = (username = "john.doe", email = "john.doe@nomail.com") => {
+      return {
+        externalId: 999,
         username: username,
         password: "AA!45aaa",
         firstName: "John",
@@ -37,7 +36,8 @@ describe("UsersService", () => {
         displayName: "John Doe",
         email: email,
         role: RoleEnum.commercial
-      } as UserDto);
+      } as UserDto;
+    }
   });
 
   afterAll(async () => {
@@ -53,13 +53,13 @@ describe("UsersService", () => {
     expect(service).toBeDefined();
   });
 
-  it("should instantiate a User entity", async () => {
-    const user = makeUser();
-    expect(user).toBeTruthy();
+  it("should instantiate a User", async () => {
+    const userDto: UserDto = makeUserDto();
+    expect(userDto).toBeTruthy();
   });
 
   it("should be createUser", async () => {
-    const user = makeUser();
+    const user: UserDto = makeUserDto();
 
     await service.createUser(user);
     const findUser = await service.getUserByUsername("john.doe");
@@ -69,12 +69,23 @@ describe("UsersService", () => {
     expect(userCreate.firstName).toEqual("John");
     expect(userCreate.lastName).toEqual("Doe");
     expect(userCreate.displayName).toEqual("John Doe");
-    expect(userCreate.external_id).toEqual(999);
+    expect(userCreate.externalId).toEqual(999);
     expect(userCreate.role).toEqual("commercial");
   });
 
-  it("should be createUser - duplicate user", async () => {
-    const user = makeUser();
+  it("should be createUser - duplicate username", async () => {
+    const user: UserDto = makeUserDto();
+    let statuscreateUser = 200;
+    try {
+      await service.createUser(user);
+    } catch (error) {
+      statuscreateUser = error.status;
+    }
+    expect(statuscreateUser).toEqual(406);
+  });
+
+  it("should be createUser - duplicate externalId", async () => {
+    const user: UserDto = makeUserDto('john.doe.duplicate');
     let statuscreateUser = 200;
     try {
       await service.createUser(user);
@@ -96,7 +107,7 @@ describe("UsersService", () => {
     expect(selectInUsersView.lastName).toEqual(user.lastName);
     expect(selectInUsersView.displayName).toEqual(user.displayName);
     expect(selectInUsersView.role).toEqual(user.role);
-    expect(selectInUsersView.external_id).toEqual(999);
+    expect(selectInUsersView.externalId).toEqual(999);
   });
 
   it("should be patchRole", async () => {

@@ -1,5 +1,5 @@
 import { IsObject, IsOptional, IsString } from "class-validator";
-import { typeAccountUser } from '../../../interfaces/user.interface';
+import { typeAccountUser } from '../models/typeAccountUser';
 
 export class ChangeDetailsUserDto {
   @IsOptional()

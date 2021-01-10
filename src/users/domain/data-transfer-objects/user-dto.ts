@@ -1,13 +1,14 @@
-import { RoleEnum, typeAccountUser } from '../../../interfaces/user.interface';
+import { RoleEnum } from '../../../interfaces/user.interface';
+import { typeAccountUser } from '../models/typeAccountUser';
 
 export class UserDto {
   readonly id: string;
 
-  readonly external_id: number;
+  readonly externalId: number;
 
   readonly username: string;
 
-  readonly password: string;
+  readonly password?: string;
 
   readonly firstName: string;
 
@@ -17,7 +18,7 @@ export class UserDto {
 
   readonly email: string;
 
-  readonly accounts?: typeAccountUser[];
+  public accounts?: typeAccountUser[];
 
   readonly role: RoleEnum;
 }

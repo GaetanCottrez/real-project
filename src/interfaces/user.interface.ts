@@ -15,8 +15,8 @@ export enum typeAccountUserEnum {
 	sc = "sc"
 }
 
-export declare interface typeAccountUser {
-	external_id: number;
+export declare interface ITypeAccountUser {
+	externalId: number;
 	displayName: string;
 	firstName: string;
 	lastName: string;
@@ -25,7 +25,7 @@ export declare interface typeAccountUser {
 
 export declare interface IUser {
 	id: string;
-	external_id: number;
+	externalId: number;
 	username: string;
 	password: string;
 	displayName: string;
@@ -33,7 +33,7 @@ export declare interface IUser {
 	lastName: string;
 	email: UserMail;
 	role: RoleEnum;
-	accounts: typeAccountUser[];
+	accounts: ITypeAccountUser[];
 	archived?: boolean;
 	trash?: boolean;
 }
