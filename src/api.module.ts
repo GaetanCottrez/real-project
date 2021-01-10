@@ -4,10 +4,12 @@ import { HttpErrorFilter } from "./shared/infrastructure/filters/http-error.filt
 import { LoggingInterceptor } from "./shared/infrastructure/interceptors/logging.interceptor";
 import { UsersModule } from "./users/users.module";
 import { AuthenticationModule } from "./authentication/authentication.module";
+import { ArticlesModule } from './articles/users.module';
 
 @Module({
   imports: [
     AuthenticationModule,
+    ArticlesModule,
     UsersModule
   ],
   providers: [
