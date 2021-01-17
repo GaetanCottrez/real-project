@@ -1,4 +1,4 @@
-import { IsObject, IsOptional, IsString } from "class-validator";
+import { IsObject, IsOptional, IsString } from 'class-validator';
 import { typeAccountUser } from '../models/typeAccountUser';
 
 export class ChangeDetailsUserDto {

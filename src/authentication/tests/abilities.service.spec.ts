@@ -1,8 +1,8 @@
-import { Test, TestingModule } from "@nestjs/testing";
-import { RoleEnum } from "../../interfaces/user.interface";
-import { User } from "../../users/domain/models/user";
-import { UserDto } from "../../users/domain/data-transfer-objects/user-dto";
-import { AbilitiesService } from "../infrastructure/abilities/abilities.service";
+import { Test, TestingModule } from '@nestjs/testing';
+import { RoleEnum } from '../../interfaces/user.interface';
+import { User } from '../../users/domain/models/user';
+import { UserDto } from '../../users/domain/data-transfer-objects/user-dto';
+import { AbilitiesService } from '../infrastructure/abilities/abilities.service';
 
 describe("AbilitiesService", () => {
   let module: TestingModule;
@@ -22,7 +22,7 @@ describe("AbilitiesService", () => {
 
     abilitiesCommercial = await abilitiesService.defineAbilityFor(
       User.create({
-        external_id: 999,
+        externalId: 999,
         username: "john.doe",
         password: "AA!45aaa",
         firstName: "John",
@@ -35,7 +35,7 @@ describe("AbilitiesService", () => {
 
     abilitiesBackoffice = await abilitiesService.defineAbilityFor(
       User.create({
-        external_id: 888,
+        externalId: 888,
         username: "backoffice",
         password: "AA!45olfk56",
         firstName: "backoffice",
@@ -48,7 +48,7 @@ describe("AbilitiesService", () => {
 
     abilitiesAdmin = await abilitiesService.defineAbilityFor(
       User.create({
-        external_id: 777,
+        externalId: 777,
         username: "admin",
         password: "AA!45bbb32",
         firstName: "admin",

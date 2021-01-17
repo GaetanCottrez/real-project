@@ -1,8 +1,7 @@
-import { UsersService } from "../application/users.service";
-import { User } from "../domain/models/user";
+import { UsersService } from '../application/users.service';
 import { RoleEnum } from '../../interfaces/user.interface';
-import { UserDto } from "../domain/data-transfer-objects/user-dto";
-import { MongodbUsersRepository } from "../infrastructure/repositories/mongodb-users.repository";
+import { UserDto } from '../domain/data-transfer-objects/user-dto';
+import { MongodbUsersRepository } from '../infrastructure/repositories/mongodb-users.repository';
 import { Db, MongoClient } from 'mongodb';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 

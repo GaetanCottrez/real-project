@@ -1,14 +1,7 @@
-import {
-  Controller,
-  Post,
-  Inject,
-  UseGuards,
-  Request,
-  UseFilters,
-} from "@nestjs/common";
-import { DomainExceptionFilter } from "../../shared/infrastructure/filters/error.filter";
-import { ApiResponse, ApiTags } from "@nestjs/swagger";
-import { AuthentificationService } from "../application/authentification.service";
+import { Controller, Inject, Post, Request, UseFilters, UseGuards } from '@nestjs/common';
+import { DomainExceptionFilter } from '../../shared/infrastructure/filters/error.filter';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthentificationService } from '../application/authentification.service';
 import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags("Auth")

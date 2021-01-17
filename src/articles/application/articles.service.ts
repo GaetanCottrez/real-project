@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { DomainError } from '../../shared/domain/domain-error';
 import { IArticlesRepository } from '../domain/repositories/articles-repository';
 import { Article } from '../domain/models/article';
@@ -9,8 +9,7 @@ export class ArticlesService implements IArticlesRepository {
   constructor(
     @Inject('IArticlesRepository')
     private readonly articlesRepository: IArticlesRepository,
-  ) {
-  }
+  ) {}
 
   async getArticles(filters: object = {}): Promise<Article[]> {
     return await this.articlesRepository.getArticles(filters);
@@ -25,7 +24,6 @@ export class ArticlesService implements IArticlesRepository {
   }
 
   articleView(article: Article): ArticleDto {
-    const articleDto = article.asDTO()
-    return articleDto;
+    return article.asDTO();
   }
 }

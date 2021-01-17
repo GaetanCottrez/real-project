@@ -1,16 +1,17 @@
 import {
+  Body,
   Controller,
   Get,
-  Body,
-  ValidationPipe,
-  Inject,
-  UseGuards,
-  UseFilters,
-  Param,
   HttpException,
   HttpStatus,
+  Inject,
+  Param,
   Patch,
-  UsePipes, Post,
+  Post,
+  UseFilters,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { User } from '../domain/models/user';
 import { UserDto } from '../domain/data-transfer-objects/user-dto';

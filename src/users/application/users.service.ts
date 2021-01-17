@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { IUsersRepository } from '../domain/repositories/users-repository';
 import { User } from '../domain/models/user';
 import { DomainError } from '../../shared/domain/domain-error';
@@ -67,8 +67,7 @@ export class UsersService implements IUsersRepository {
   }
 
   userView(user: User): UserDto {
-    const userDto = user.asDTOWithoutPassword()
-    return userDto;
+    return user.asDTOWithoutPassword();
   }
 
   async patchRole(idUser: string, role: RoleEnum): Promise<User> {

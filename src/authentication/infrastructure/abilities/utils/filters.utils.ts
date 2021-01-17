@@ -1,4 +1,4 @@
-import { PermissionScope } from "./permissions.utils";
+import { PermissionScope } from './permissions.utils';
 
 export class Filter {
   private scopes: PermissionScope[];

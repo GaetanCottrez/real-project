@@ -1,4 +1,4 @@
-import { toMongoQuery } from "@casl/mongoose";
+import { toMongoQuery } from '@casl/mongoose';
 
 export class PermissionScope {
 

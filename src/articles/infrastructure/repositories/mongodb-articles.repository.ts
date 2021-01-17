@@ -6,7 +6,7 @@ import { ArticleDto } from '../../domain/data-transfer-objects/article-dto';
 import { Article } from '../../domain/models/article';
 import { ArticleCategoryDto } from '../../domain/data-transfer-objects/article-category-dto';
 import { ArticleCategory } from '../../domain/models/articleCategory';
-import { ObjectID } from 'mongodb'
+import { ObjectID } from 'mongodb';
 
 @Injectable()
 export class MongodbArticlesRepository implements IArticlesRepository {
@@ -37,14 +37,6 @@ export class MongodbArticlesRepository implements IArticlesRepository {
   }
 
   async fromDatabase(article: any): Promise<Article> {
-    article.exceptions.forEach(exception => {
-      createInstanceService.articleCategory({
-        reference: exception.ar_ref,
-        category: exception.ac_categorie,
-        priceSell: exception.ac_prixven,
-        referenceCustomer: exception.ct_num,
-      } as ArticleCategoryDto);
-    });
     return createInstanceService.article({
       id: article._id,
       reference: article.dl_ref,

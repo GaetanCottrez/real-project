@@ -38,7 +38,7 @@ describe('ArticlesService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should be getUsers', async () => {
+  it('should be getArticles and getArticleById', async () => {
     const articles = await service.getArticles();
     const selectInArticlesView = await service.articleView(articles[5]);
     const instanceArticle = await service.getArticleById(articles[5].id);

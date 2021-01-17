@@ -1,12 +1,7 @@
-import { Injectable } from "@nestjs/common";
-import {
-  AbilityBuilder,
-  Ability,
-  AbilityTuple,
-  MongoQuery
-} from "@casl/ability";
-import { RoleEnum } from "../../../interfaces/user.interface";
-import { User } from "../../../users/domain/models/user";
+import { Injectable } from '@nestjs/common';
+import { Ability, AbilityBuilder, AbilityTuple, MongoQuery } from '@casl/ability';
+import { RoleEnum } from '../../../interfaces/user.interface';
+import { User } from '../../../users/domain/models/user';
 
 @Injectable()
 export class AbilitiesService {

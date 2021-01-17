@@ -1,11 +1,7 @@
-import {
-  BadRequestException,
-  Injectable,
-  NestMiddleware
-} from "@nestjs/common";
-import { NextFunction, Request, Response } from "express";
+import { BadRequestException, Injectable, NestMiddleware } from '@nestjs/common';
+import { NextFunction, Request, Response } from 'express';
 
-import * as csurf from "csurf";
+import * as csurf from 'csurf';
 
 @Injectable()
 export class CsurfMiddleware implements NestMiddleware {

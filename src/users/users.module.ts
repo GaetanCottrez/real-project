@@ -1,7 +1,7 @@
 import { HttpModule, Module } from '@nestjs/common';
-import { UsersService } from "./application/users.service";
-import { UsersController } from "./infrastructure/users.controller";
-import { MongodbUsersRepository } from "./infrastructure/repositories/mongodb-users.repository";
+import { UsersService } from './application/users.service';
+import { UsersController } from './infrastructure/users.controller';
+import { MongodbUsersRepository } from './infrastructure/repositories/mongodb-users.repository';
 
 @Module({
   imports: [

@@ -1,4 +1,5 @@
 import { UserMail } from '../users/domain/value-objects/usermail';
+
 export enum RoleEnum {
 	commercial = "commercial",
 	backoffice = "backoffice",

@@ -1,10 +1,10 @@
-import { BadRequestException, MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
-import { HelmetMiddleware } from "./helmet.middleware";
-import { CorsMiddleware } from "./cors.middleware";
-import { SessionMiddleware } from "./session.middleware";
-import { CsurfMiddleware } from "./csurf.middleware";
-import { RateLimitMiddleware } from "./rate-limit.middleware";
+import { BadRequestException, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { HelmetMiddleware } from './helmet.middleware';
+import { CorsMiddleware } from './cors.middleware';
+import { SessionMiddleware } from './session.middleware';
+import { CsurfMiddleware } from './csurf.middleware';
+import { RateLimitMiddleware } from './rate-limit.middleware';
 
 @Module({
   imports: [ConfigModule.forRoot()],

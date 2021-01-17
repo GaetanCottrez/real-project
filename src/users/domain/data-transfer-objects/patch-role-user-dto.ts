@@ -1,6 +1,6 @@
-import { IsString } from "class-validator";
-import { RoleEnum } from "../../../interfaces/user.interface";
-import { ApiProperty } from "@nestjs/swagger";
+import { IsString } from 'class-validator';
+import { RoleEnum } from '../../../interfaces/user.interface';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class PatchRoleUserDto {
   @ApiProperty({

@@ -1,11 +1,11 @@
-import { ExtractJwt, Strategy } from "passport-jwt";
-import { PassportStrategy } from "@nestjs/passport";
-import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { ConfigModule } from "@nestjs/config";
-import * as bcrypt from "bcrypt";
-import { UsersService } from "../../../users/application/users.service";
-import { AuthentificationService } from "../../application/authentification.service";
-import { AbilitiesService } from "../abilities/abilities.service";
+import { ExtractJwt, Strategy } from 'passport-jwt';
+import { PassportStrategy } from '@nestjs/passport';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import * as bcrypt from 'bcrypt';
+import { UsersService } from '../../../users/application/users.service';
+import { AuthentificationService } from '../../application/authentification.service';
+import { AbilitiesService } from '../abilities/abilities.service';
 
 ConfigModule.forRoot();
 

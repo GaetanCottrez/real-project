@@ -1,11 +1,11 @@
-import { NestFactory } from "@nestjs/core";
-import { NestExpressApplication } from "@nestjs/platform-express";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { Logger } from "@nestjs/common";
-import { AppModule } from "./app.module";
-import { join } from "path";
-import * as os from "os";
-import * as fs from "fs";
+import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { Logger } from '@nestjs/common';
+import { AppModule } from './app.module';
+import { join } from 'path';
+import * as os from 'os';
+import * as fs from 'fs';
 
 const port = process.env.PORT || 3000;
 

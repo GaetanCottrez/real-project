@@ -1,5 +1,5 @@
-import { DomainError } from "../../../shared/domain/domain-error";
-import * as bcrypt from 'bcrypt'
+import { DomainError } from '../../../shared/domain/domain-error';
+import * as bcrypt from 'bcrypt';
 
 const PASSWORD_RE = new RegExp('(?=^.{8,}$)(?=.*\\d)(?=.*[!@#$%^&*]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$');
 const BCRYPT_PATTERN = new RegExp('^\\$2[ayb]\\$.{56}$');

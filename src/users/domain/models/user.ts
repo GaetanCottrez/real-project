@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { UserDto } from '../data-transfer-objects/user-dto';
 import { IUser, RoleEnum } from '../../../interfaces/user.interface';
 import { UserMail } from '../value-objects/usermail';
-import { UserPassword} from '../value-objects/userpassword';
+import { UserPassword } from '../value-objects/userpassword';
 import { ChangeDetailsUserDto } from '../data-transfer-objects/change-details-user-dto';
 import { typeAccountUser } from './typeAccountUser';
 

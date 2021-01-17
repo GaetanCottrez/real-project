@@ -1,13 +1,9 @@
-import {
-  ExecutionContext,
-  Injectable,
-  UnauthorizedException
-} from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
-import { Reflector } from "@nestjs/core";
-import { RoleEnum } from "../../../interfaces/user.interface";
-import { PermissionScope } from "../abilities/utils/permissions.utils";
-import { Filter } from "../abilities/utils/filters.utils";
+import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { Reflector } from '@nestjs/core';
+import { RoleEnum } from '../../../interfaces/user.interface';
+import { PermissionScope } from '../abilities/utils/permissions.utils';
+import { Filter } from '../abilities/utils/filters.utils';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard("jwt") {

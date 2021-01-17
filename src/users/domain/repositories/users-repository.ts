@@ -1,5 +1,5 @@
-import { User } from "../models/user";
-import { UserDto } from "../data-transfer-objects/user-dto";
+import { User } from '../models/user';
+import { UserDto } from '../data-transfer-objects/user-dto';
 import { typeAccountUser } from '../models/typeAccountUser';
 
 export interface IUsersRepository {
