@@ -4,15 +4,17 @@ import { HttpErrorFilter } from './shared/infrastructure/filters/http-error.filt
 import { LoggingInterceptor } from './shared/infrastructure/interceptors/logging.interceptor';
 import { UsersModule } from './users/users.module';
 import { AuthenticationModule } from './authentication/authentication.module';
-import { ArticlesModule } from './articles/users.module';
+import { ArticlesModule } from './articles/articles.module';
 import { CustomersModule } from './customers/customers.module';
+import { OrdersModule } from './orders/orders.module';
 
 @Module({
   imports: [
     AuthenticationModule,
     ArticlesModule,
     CustomersModule,
-    UsersModule
+    UsersModule,
+    OrdersModule
   ],
   providers: [
     {

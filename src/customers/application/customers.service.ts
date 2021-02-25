@@ -4,7 +4,6 @@ import { Customer } from '../domain/models/customer';
 import { CustomerDto } from '../domain/data-transfer-objects/customer-dto';
 import { ICustomersRepository } from '../domain/repositories/customers-repository';
 import { DeliveryAddressDto } from '../domain/data-transfer-objects/delivery-address-dto';
-import { UserDto } from '../../users/domain/data-transfer-objects/user-dto';
 
 @Injectable()
 export class CustomersService implements ICustomersRepository {

@@ -9,6 +9,8 @@ import { Customer } from '../../customers/domain/models/customer';
 import { ConstructCustomerDto } from '../../customers/domain/data-transfer-objects/construct-customer-dto';
 import { DeliveryAddress } from '../../customers/domain/models/deliveryAddress';
 import { DeliveryAddressDto } from '../../customers/domain/data-transfer-objects/delivery-address-dto';
+import { LineOrder } from '../../orders/domain/models/lineOrder';
+import { ConstructLineOrderDto } from '../../orders/domain/data-transfer-objects/construct-line-order.dto';
 
 export class createInstanceService {
   static deliveryAddress(
@@ -67,5 +69,9 @@ export class createInstanceService {
     articleCategoryDto: ArticleCategoryDto,
   ): ArticleCategory {
     return ArticleCategory.create(articleCategoryDto);
+  }
+
+  static lineOrder(constructLineOrderDto: ConstructLineOrderDto) : LineOrder | null {
+    return constructLineOrderDto && constructLineOrderDto.article ? new LineOrder(constructLineOrderDto) : null;
   }
 }

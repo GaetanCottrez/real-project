@@ -27,7 +27,7 @@ export class MongodbCustomersRepository implements ICustomersRepository {
       arrayInstanceDeliveryAddress.push(
         createInstanceService.deliveryAddress({
           id: delivery.id,
-          externalId: delivery.li_no,
+          externalId: Number(delivery.li_no),
           designation: delivery.li_intitule,
           addressLine1: delivery.li_adresse,
           addressLine2: delivery.li_complement,
