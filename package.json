@@ -1,5 +1,5 @@
 {
-  "name": "carpolish-api-v2",
+  "name": "real-project-api-v2",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -23,7 +23,7 @@
   "dependencies": {
     "@casl/ability": "^4.1.6",
     "@casl/mongoose": "^3.1.0",
-    "@nestjs/common": "^7.0.0",
+    "@nestjs/common": "^7.6.13",
     "@nestjs/config": "^0.6.1",
     "@nestjs/core": "^7.0.0",
     "@nestjs/jwt": "^7.2.0",
@@ -82,7 +82,7 @@
   },
   "config": {
     "mongodbMemoryServer": {
-      "version": "latest"
+      "version": "4.0.14"
     }
   },
   "jest": {
